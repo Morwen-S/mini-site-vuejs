@@ -2,7 +2,7 @@
   <div class="home">
     <button v-on:click="component='registration-form'">Sign up</button>
     <button v-on:click="component='login-form'">Login</button>
-    <component v-bind:is="component"></component>
+    <component v-bind:is="component" v-on:changeCmponent="updateComponent($event)"></component>
 
     <router-link to="/user-profile">UserProfile test link</router-link>
   </div>
@@ -22,8 +22,13 @@ export default {
   },
   data () {
   return {
-    component: 'login-form',
+    component: 'registration-form',
     };
+  },
+  methods: {
+    updateComponent: function(updatedComponent) {
+      this.component = updatedComponent;
+    }
   }
 }
 </script>

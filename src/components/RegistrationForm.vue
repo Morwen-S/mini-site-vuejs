@@ -2,32 +2,27 @@
   <div class="input-form">
     <h3 class="title">Sign Up</h3>
     <form>
-      <label for="email" >E-Mail Address</label>
-      <div>
-        <input id="email" type="email" v-model="email" required autofocus>
-      </div>
       <label for="name">Name</label>
       <div>
-        <input id="name" type="text" v-model="name" required autofocus>
+        <input id="name" type="text" v-model="name">
       </div>
       <label for="login">Login</label>
       <div>
-        <input id="login" type="text" v-model="login" required autofocus>
+        <input id="login" type="text" v-model="login">
       </div>
-      <p v-if="errorLogin">Login is already exist!</p>
-      <label for="password" >Password</label>
+      <label for="password">Password</label>
       <div>
-        <input id="password" type="password" v-model="password" required>
+        <input id="password" type="password" v-model="password">
       </div>
       <label for="password-confirm">Confirm Password</label>
       <div>
-        <input id="password-confirm" type="password" v-model="password_confirmation" required>
+        <input id="password-confirm" type="password" v-model="password_confirmation">
       </div>
-      <p v-if="errorPassword">Passwords do not match!</p>
 
-        <button type="submit" v-on:click="validationForm">
+        <button type="button" v-on:click="validationForm">
           Sign up
         </button>
+        <span v-if="error"> {{ error }} </span>
     </form>
   </div>
 </template>
@@ -41,9 +36,7 @@ export default {
   name: 'RegistrationForm',
   data () {
   return {
-    errorLogin: false,
-    errorPassword: false,
-    email : "",
+    error: "",
     name: "",
     login: "",
     password : "",
@@ -52,22 +45,28 @@ export default {
   },
   methods: {
     validationForm: function () {
-      if (extract(this.login) !== null) {
-        this.errorLogin = true;
+      this.error = "";
+
+      if (!this.name || !this.login || !this.password || !this.password_confirmation) {
+        this.error = "Fill in all the fields!"
+      }else if (extract(this.login) !== null) {
+        this.error = 'Logn is used before!';
       } else if (this.password !== this.password_confirmation) {
         this.password = '';
         this.password_confirmation = '';
-        this.errorPassword = true;
-      } else  {
+        this.error = 'Passwords do not match!';
+      }
+
+      if (!this.error){
         var obj = {
-          userEmail: this.email,
           userName: this.name,
           userLogin: this.login,
           userPassword: this.password,
         }
         save(obj);
+        this.$emit('changeCmponent', 'login-form')
       }
-    }
+    },
   },
 }
 </script>

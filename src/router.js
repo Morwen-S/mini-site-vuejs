@@ -13,7 +13,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/user-profile',
+      path: '/user-profile/:login',
       name: 'userProfile',
       component: UserProfile
     },
