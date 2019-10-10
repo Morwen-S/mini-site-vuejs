@@ -6,19 +6,15 @@
       <div>
         <input id="email" type="email" v-model="email" required autofocus>
       </div>
-      <label for="name" >Name</label>
+      <label for="name">Name</label>
       <div>
         <input id="name" type="text" v-model="name" required autofocus>
       </div>
-      <label for="nickname">Nickname</label>
+      <label for="login">Login</label>
       <div>
-        <input id="nickname" type="text" v-model="nickname" required autofocus>
+        <input id="login" type="text" v-model="login" required autofocus>
       </div>
-      <label for="role" >Chose your role:</label>
-        <select id="role" v-model="role" required>
-          <option value=1>User</option>
-          <option value=0>Admin</option>
-        </select>
+      <p v-if="errorLogin">Login is already exist!</p>
       <label for="password" >Password</label>
       <div>
         <input id="password" type="password" v-model="password" required>
@@ -27,39 +23,52 @@
       <div>
         <input id="password-confirm" type="password" v-model="password_confirmation" required>
       </div>
+      <p v-if="errorPassword">Passwords do not match!</p>
 
-        <button type="submit" v-on:click="vlidationForm">
+        <button type="submit" v-on:click="validationForm">
           Sign up
         </button>
-        <span v-if="error">Passwords do not match!</span>
-
     </form>
   </div>
 </template>
 
 <script>
+import {save, extract} from '@/UserData.js'
+// save user's data in localStorage
+
+
 export default {
   name: 'RegistrationForm',
   data () {
   return {
-    error: false,
+    errorLogin: false,
+    errorPassword: false,
     email : "",
     name: "",
-    nickname: "",
+    login: "",
     password : "",
     password_confirmation: "",
-    role: null,
-  }
-},
-methods: {
-  vlidationForm: function () {
-    if (this.password !== this.password_confirmation) {
-      this.password = '';
-      this.password_confirmation = '';
-      this.error = true;
     }
-  }
-},
+  },
+  methods: {
+    validationForm: function () {
+      if (extract(this.login) !== null) {
+        this.errorLogin = true;
+      } else if (this.password !== this.password_confirmation) {
+        this.password = '';
+        this.password_confirmation = '';
+        this.errorPassword = true;
+      } else  {
+        var obj = {
+          userEmail: this.email,
+          userName: this.name,
+          userLogin: this.login,
+          userPassword: this.password,
+        }
+        save(obj);
+      }
+    }
+  },
 }
 </script>
 
