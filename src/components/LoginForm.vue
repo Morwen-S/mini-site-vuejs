@@ -19,9 +19,7 @@
 </template>
 
 <script>
-
 import { extract } from '@/UserData.js'
-import Router from '@/router'
 
 export default {
   name: 'LoginForm',
