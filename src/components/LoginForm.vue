@@ -1,21 +1,25 @@
 <template>
-  <div class="input-form">
+  <div>
     <h3 class="title">Log in</h3>
-    <form>
-      <label for="login">Nickname</label>
-      <div>
-        <input id="login" type="text" v-model="login" required autofocus>
-      </div>
-      <label for="password" >Password</label>
-      <div>
-        <input id="password" type="password" v-model="password" required>
-      </div>
-          <button type="button" v-on:click="validationForm">
-            Log in
-          </button>
-          <span v-if="error"> {{ error }} </span>
-    </form>
-  </div>
+    <div class="input-form">
+      <form>
+        <label for="login">Nickname</label>
+        <div>
+          <input id="login" type="text" v-model="login" required autofocus>
+        </div>
+        <label for="password" >Password</label>
+        <div>
+          <input id="password" type="password" v-model="password" required>
+        </div>
+        <div v-if="error" class="error-block">
+          <p> {{ error }} </p>
+        </div>
+            <button type="button" v-on:click="validationForm">
+              Log in
+            </button>
+      </form>
+    </div>
+    </div>
 </template>
 
 <script>
@@ -36,14 +40,14 @@ export default {
         if (this.password === extract(this.login).userPassword) {
           this.$router.push({ path: `/user-profile/${this.login}` });
         } else {
-          this.error = "Wrong password";
+          this.error = "Wrong password!";
         }
       } else {
-        this.error = "Wrong login";
+        this.error = "Wrong login!";
       }
     }
   },
 }
 </script>
-
+<style>
 </style>

@@ -1,29 +1,32 @@
 <template>
-  <div class="input-form">
+  <div>
     <h3 class="title">Sign Up</h3>
-    <form>
-      <label for="name">Name</label>
-      <div>
-        <input id="name" type="text" v-model="name">
-      </div>
-      <label for="login">Login</label>
-      <div>
-        <input id="login" type="text" v-model="login">
-      </div>
-      <label for="password">Password</label>
-      <div>
-        <input id="password" type="password" v-model="password">
-      </div>
-      <label for="password-confirm">Confirm Password</label>
-      <div>
-        <input id="password-confirm" type="password" v-model="password_confirmation">
-      </div>
-
-        <button type="button" v-on:click="validationForm">
-          Sign up
-        </button>
-        <span v-if="error"> {{ error }} </span>
-    </form>
+    <div class="input-form">
+      <form>
+        <label for="name">Name</label>
+        <div>
+          <input id="name" type="text" v-model="name">
+        </div>
+        <label for="login">Login</label>
+        <div>
+          <input id="login" type="text" v-model="login">
+        </div>
+        <label for="password">Password</label>
+        <div>
+          <input id="password" type="password" v-model="password">
+        </div>
+        <label for="password-confirm">Confirm Password</label>
+        <div>
+          <input id="password-confirm" type="password" v-model="password_confirmation">
+        </div>
+        <div v-if="error" class="error-block">
+          <p> {{ error }} </p>
+        </div>
+          <button type="button" v-on:click="validationForm">
+            Sign up
+          </button>
+      </form>
+    </div>
   </div>
 </template>
 
