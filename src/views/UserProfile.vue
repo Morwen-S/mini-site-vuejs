@@ -1,24 +1,34 @@
 <template>
-  <div class="">
-
+  <div>
     <custom-header>
       <button type="button" v-on:click="logOut">
         Log out
       </button>
     </custom-header>
+    <div class="user-paje">
 
-    <div>
-      <img src="@/assets/foto.png" alt="">
-    </div>
 
-    <div>
-      <p>User Profile</p>
-      <div>Name: {{ userData.userName }}</div>
-      <div>Login: {{ userData.userLogin}} </div>
-      <div>
-        <ol>
-          <li v-for="todo in todos"> {{todo}}</li>
-        </ol>
+      <div class="block">
+
+        <div class="profile-img ">
+          <img src="@/assets/foto.png" alt="">
+        </div>
+
+        <div class="profile-info">
+          <h2>{{ userData.userLogin}}</h2>
+          <p>Name: {{ userData.userName }}</p>
+          <p>Login: {{ userData.userLogin}} </p>
+        </div>
+      </div>
+
+      <div class="block">
+
+        <div class="list">
+          <ul>
+            <h3>Some useful list</h3>
+            <li v-for="todo in todos"> {{todo}}</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -39,9 +49,9 @@ export default {
       userData: extract(this.$route.params.login),
       newTodoText: '',
        todos: [
-          'Помыть посуду',
-          'Вынести мусор',
-          'Подстричь газон'
+          'Very useful information about site and anouther things.',
+          'Some text, which very important, read it. Maybe somthing about Star wars? Or not! ',
+          'That can be samething dynamic. Your frend list, for example...'
        ],
     }
   },
